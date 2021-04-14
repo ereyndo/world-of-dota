@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MDE</title>
+    <link rel="stylesheet" media="screen" href="css/mediumscreen.css">
+    <link rel="stylesheet" media="screen and (min-width: 1700px)" href="css/widescreen.css">
+    <link rel="stylesheet" media="screen and (max-width: 600px)" href="css/smallscreen.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <a class="header__title" href="#home">MDE</a>
+      <div class="header__sidenav-btn">
+        <span></span>
+      </div>
+      <nav class="header__sidenav">
+        <ul class="header__links">
+          <li>
+            <a href="#home">Home</a>
+          </li>
+          <li>
+            <a data-articles>Articles</a>
+          </li>
+          <li>
+            <a href="#contacts">Contacts</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section id="home" class="introduction max-width-2500">
+      <video autoplay muted loop class="welcome-video">
+        <source src="external_resources/welcome-video.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+      <div class="dimming"></div>
+      <p class="introduction__text">
+        <span class="introduction__text-animation-first-part">DO YOU WANT <span class="dota-colored-text">TO DIVE INTO</span></span><br><span class="introduction__text-animation-second-part"><span class="dota-colored-text">THE DOTA2 WORLD</span>?</span>
+        <br>
+        <span class="introduction__text-animation-third-part">THEN LET'S GO!</span>
+      </p>
+      <a class="introduction-button" href="#articles">
+        <div class="introduction-button__arrow introduction-button__first"></div>
+        <div class="introduction-button__arrow introduction-button__second"></div>
+      </a>
+    </section>
+    <section id="articles" class="section-of-articles max-width-2500">
+      <div class="section-of-articles__intro">
+        <div class="section-of-articles__info">
+          <h1 class="section-of-articles__title">Good for you</h1>
+          <p class="section-of-articles__description">5 tips to play better</p>
+          <a class="section-of-articles__link" href="#"><span>Learn more</span> <i class="arrow-right"></i></a>
+        </div>
+        <div class="section-of-articles__img-block">
+          <img alt="Dota2 hero Lina who hold ranked medals" src="external_resources/lina.png">
+        </div>
+      </div>
+      <div class="section-of-articles__intro">
+        <div class="section-of-articles__info">
+          <h1 class="section-of-articles__title">Your helper</h1>
+          <p class="section-of-articles__description">If you don't know what the hero you want to play, here you go</p>
+          <a class="section-of-articles__link" href="#"><span>Learn more</span> <i class="arrow-right"></i></a>
+        </div>
+        <div class="section-of-articles__img-block">
+          <img alt="Dota2 hero selection" src="external_resources/hero_pick.png">
+        </div>
+      </div>
+    </section>
+    <section id="contacts" class="contacts max-width-2500">
+      <div class="contacts__header-block">
+        <h1>Stay on top!</h1>
+      </div>
+      <div class="contacts__links">
+        <div class="icons">
+          <a href="#" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+        </div>
+        <div class="icons">
+          <a href="#" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+        </div>
+        <div class="icons">
+          <a href="#" target="_blank"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </section>
+    <hr>
+    <footer class="footer max-width-2500">
+      <p>&copy; created by ereyndo</p>
+    </footer>
+    <!-- JQuery for smooth scrolling -->
+    <script defer src="jquery/scroll_button.js"></script>
+    <!-- JS -->
+    <script defer src="js/main.js"></script>
+  </body>
+</html>
