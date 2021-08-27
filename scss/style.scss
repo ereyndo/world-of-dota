@@ -1,0 +1,707 @@
+$dota2-color: #e0411f;
+$center-of-the-sidenav-circle: calc(100% + 10px) -10px;
+$circle-radius: calc(1.5 * max(var(--sidenav-width), 100vh));
+$text-color: #dbdbdb;
+
+:root {
+    --width-of-the-introduction-button: 40px;
+    --sidenav-width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+    :root {
+        --sidenav-width: 400px;
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    :root {
+        --width-of-the-introduction-button: 60px;
+        --sidenav-width: 600px;
+    }
+}
+
+* {
+    margin: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.container {
+    position: relative;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto !important;
+    background-color: #474747;
+    color: white;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+/*----------NAVIGATION BAR----------*/
+.header {
+    position: fixed;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 45px;
+    border-bottom: 1px solid #2f2f2f;
+    z-index: 101;
+    transition: 0.5s;
+
+    &__title {
+        margin-left: 10px;
+        font-family: 'Cinzel', serif;
+        text-decoration: underline $dota2-color;
+        text-underline-position: under;
+        font-size: 20px;
+        color: $text-color;
+    }
+}
+
+.main-header-move-down {
+    background-color: #2f2f2f;
+    box-shadow: 0 1px 7px -1px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+@media screen and (min-width: 400px) {
+    .header {
+        height: 54px;
+
+        &__title {
+            margin-left: 15px;
+            font-size: 22px;
+        }
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .header__title {
+        margin-left: 40px;
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    .header {
+        height: 75px;
+
+        &__title {
+            margin-left: 50px;
+            font-size: 32px;
+        }
+    }
+}
+
+@media screen and (min-width: 2500px) {
+    .header {
+        background-color: #2f2f2f;
+    }
+}
+
+/*---------HAMBURGER BUTTON---------*/
+.header__sidenav-btn {
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    font-size: 31px;
+    margin-right: 0;
+    z-index: 103;
+
+    span,
+    span::before,
+    span::after {
+        position: absolute;
+        top: 50%;
+        margin-top: -1px;
+        left: 50%;
+        margin-left: -12.5px;
+        width: 25px;
+        height: 2px;
+        background-color: $dota2-color;
+    }
+
+    span::before,
+    span::after {
+        content: '';
+        transition: 0.3s;
+    }
+
+    span::before {
+        transform: translateY(-8px);
+    }
+
+    span::after {
+        transform: translateY(8px);
+    }
+
+    &--active span {
+        height: 0;
+    }
+
+    &--active span::before {
+        transform: rotate(45deg);
+    }
+
+    &--active span::after {
+        transform: rotate(-45deg);
+    }
+}
+
+@media screen and (min-width: 400px) {
+    .header__sidenav-btn {
+        margin-right: 5px;
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    .header__sidenav-btn {
+        height: 70px;
+        width: 70px;
+        margin-right: 15px;
+
+        span,
+        span::before,
+        span::after {
+            margin-left: -19.5px;
+            width: 40px;
+            height: 4px;
+        }
+
+        span::before {
+            transform: translateY(-12px);
+        }
+
+        span::after {
+            transform: translateY(10px);
+        }
+    }
+}
+
+/*---------------SIDENAV---------------*/
+.header__sidenav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: var(--sidenav-width);
+    height: 100vh;
+    background-color: #262626;
+    clip-path: circle(10px at $center-of-the-sidenav-circle);
+    transition: all 1s ease-out;
+    z-index: 102;
+
+    &--opened {
+        clip-path: circle($circle-radius at $center-of-the-sidenav-circle);
+        transition: all 1s ease-out;
+    }
+}
+
+.header__links {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: min(80vh, 600px);
+    margin-top: 10vh;
+    padding: 0;
+    list-style-type: none;
+
+    li {
+        opacity: 0;
+    }
+
+    li a {
+        text-decoration: none;
+        font-size: 28px;
+        color: $text-color;
+        transition: 0.3s;
+    }
+
+    li a[data-articles] {
+        cursor: pointer;
+    }
+
+    $i: 1;
+    @while $i < 4 {
+        li:nth-child(#{$i}) { transition: all 0.5s ease #{0.2 + 0.15 * ($i - 1)}s; }
+        $i: $i + 1;
+    }
+}
+
+li.fade {
+    opacity: 1;
+}
+
+@media(hover: hover) and (pointer: fine) {
+    .header__links li a:hover {
+        color: $dota2-color;
+        transition: 0.3s;
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    .header__links li a {
+        font-size: 40px;
+    }
+}
+
+/*-------INTRODUCTION SECTION-------*/
+.introduction {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    min-height: 350px;
+    max-height: 240vw;
+    width: 100%;
+
+    &__text {
+        position: absolute;
+        right: 10px;
+        margin-top: max(30vh, 105px);
+        font-family: 'Comfortaa', cursive;
+        font-size: 16px;
+        line-height: 1.3em;
+        color: $text-color;
+        z-index: 2;
+    }
+}
+
+.welcome-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(60%);
+}
+
+.dota-colored-text {
+    color: $dota2-color;
+}
+
+@mixin intro-text-animation($time-func, $duration, $delay: 0.5s, $iter-count: 1, $text: text, $mode: both) {
+    animation-name: $text;
+    animation-delay: $delay;
+    animation-iteration-count: $iter-count;
+    animation-duration: $duration;
+    animation-fill-mode: $mode;
+    animation-timing-function: $time-func;
+}
+
+.introduction__text-animation {
+    &-first-part {
+        @include intro-text-animation(cubic-bezier(0.0, 0.0, 0.2, 1), 1200ms);
+    }
+
+    &-second-part {
+        @include intro-text-animation(cubic-bezier(0.0, 0.0, 0.6, 1), 450ms);
+    }
+
+    &-third-part {
+        display: inline-block;
+        margin-top: 0.8em;
+        @include intro-text-animation(cubic-bezier(0.0, 0.0, 0.2, 1), 1000ms, 3s);
+    }
+}
+
+@keyframes text {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .introduction__text {
+        right: 20px;
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .introduction__text {
+        right: 40px;
+        font-size: 30px;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .introduction__text {
+        right: 80px;
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 2300px) {
+    .introduction__text {
+        right: 150px;
+        font-size: 50px;
+    }
+}
+
+/*--------INTRODUCTION-BUTTON--------*/
+.introduction-button {
+    position: absolute;
+    width: var(--width-of-the-introduction-button);
+    height: 40px;
+    cursor: pointer;
+    bottom: 10px;
+    left: calc(50% - var(--width-of-the-introduction-button) / 2);
+    z-index: 13;
+
+    &__arrow {
+        position: absolute;
+        left: 4px;
+        top: 14px;
+    }
+
+    &__arrow::before,
+    &__arrow::after {
+        position: relative;
+        content: '';
+        display: block;
+        width: 18px;
+        height: 3px;
+        background: $text-color;
+    }
+
+    &__arrow::before {
+        transform: rotate(35deg);
+    }
+
+    &__arrow::after {
+        left: 14px;
+        bottom: 3px;
+        transform: rotate(-35deg);
+    }
+
+    &__second {
+        margin-top: 8px;
+    }
+}
+
+@media(hover: hover) and (pointer: fine) {
+    @keyframes bounceAlpha {
+        0% {opacity: 1; transform: translateY(0px) scale(1);}
+        25%{opacity: 0; transform: translateY(10px) scale(0.9);}
+        26%{opacity: 0; transform: translateY(-10px) scale(0.9);}
+        55% {opacity: 1; transform: translateY(0px) scale(1);}
+    }
+
+    %intro-btn-for-hover {
+        animation-name: bounceAlpha;
+        animation-duration: 1.4s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    .introduction-button:hover .introduction-button__first,
+    .introduction-button:hover .introduction-button__second {
+        @extend %intro-btn-for-hover;
+    }
+
+    .introduction-button:hover .introduction-button__first {
+        animation-delay: 0.2s;
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    .introduction-button {
+        height: 60px;
+
+        &__arrow {
+            left: 6px;
+            top: 24px;
+        }
+
+        &__arrow::before,
+        &__arrow::after {
+            width: 27px;
+            height: 4px;
+        }
+
+        &__arrow::after {
+            left: 20px;
+            bottom: 4px;
+        }
+
+        &__second {
+            margin-top: 10px;
+        }
+    }
+}
+
+/*----------ARTICLES SECTION ----------*/
+.section-of-articles {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0;
+}
+
+.article {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1;
+    height: 400px;
+    margin: 6px 0 0 0;
+    background-color: #000000;
+    color: $text-color;
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    &__title {
+        margin-top: 50px;
+        font-size: 25px;
+    }
+
+    &__description {
+        margin: 5px;
+        font-size: 17px;
+        text-align: center;
+    }
+
+    &__link {
+        color: $dota2-color;
+        margin-top: 10px;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    &__img-block {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: center;
+
+        img {
+            object-fit: scale-down;
+            width: 280px;
+        }
+    }
+}
+
+.arrow-right {
+    display: inline-block;
+    margin-bottom: 1px;
+    margin-left: 2px;
+    padding: 3px;
+    border: solid;
+    border-width: 0 2px 2px 0;
+    transform: rotate(-45deg);
+}
+
+@media(hover: hover) and (pointer: fine) {
+    .article__link:hover span {
+        text-decoration: underline;
+    }
+}
+
+@media screen and (min-width: 320px) {
+    .article {
+        height: 450px;
+
+        &__img-block img {
+            width: 320px;
+        }
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .section-of-articles {
+        padding: 5px;
+    }
+
+    .article {
+        height: 600px;
+        margin: 5px;
+
+        &__title {
+            font-size: 30px;
+        }
+
+        &__description {
+            margin: 8px;
+            font-size: 20px;
+        }
+
+        &__link {
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        &__img-block img {
+            width: 550px;
+        }
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    .article {
+        height: 800px;
+
+        &__title {
+            font-size: 40px;
+        }
+
+        &__description {
+            margin: 10px;
+            font-size: 25px;
+        }
+
+        &__link {
+            margin-top: 20px;
+            font-size: 23px;
+        }
+
+        &__img-block img {
+            width: 650px;
+        }
+    }
+}
+
+/*---------------CONTACTS---------------*/
+.contacts {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__header-block{
+        display: inline-block;
+        margin-top: 140px;
+
+        h1 {
+            font-family: 'Comfortaa', cursive;
+            font-size: 25px;
+            text-transform: uppercase;
+            background: linear-gradient(330deg, rgb(224, 65, 31) 0%, rgb(255,161,37) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    &__links {
+        display: flex;
+        justify-content: space-between;
+        width: 250px;
+        margin-top: 40px;
+        margin-bottom: 100px;
+    }
+}
+
+.icons a {
+    color: rgb(255,161,37);
+    font-size: 25px;
+    transition: color 400ms;
+}
+
+@media(hover: hover) and (pointer: fine) {
+    .icons:hover a {
+        color: $dota2-color;
+    }
+}
+
+@media screen and (min-width: 400px) {
+    .contacts {
+        &__header-block h1 {
+            font-size: 30px;
+        }
+
+        &__links {
+            width: 280px;
+        }
+    }
+
+    .icons a {
+        font-size: 30px;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .contacts {
+        &__header-block {
+            margin-top: 190px;
+
+            h1 {
+                font-size: 40px;
+            }
+        }
+
+        &__links {
+            width: 500px;
+            margin-top: 100px;
+            margin-bottom: 120px;
+        }
+    }
+
+    .icons a {
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    .contacts {
+        &__header-block {
+            margin-top: 300px;
+
+            h1 {
+                font-size: 55px;
+            }
+        }
+
+        &__links {
+            width: 750px;
+            margin-top: 120px;
+            margin-bottom: 150px;
+        }
+    }
+
+    .icons a {
+        font-size: 55px;
+    }
+}
+/*---------------FOOTER---------------*/
+.footer {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    z-index: 100;
+
+    p {
+        color: #bfbfbf;
+        margin-right: 30px;
+        cursor: default;
+    }
+}
+
+hr {
+    width: min(90%, 2250px);
+    height: 2px;
+    background: linear-gradient(330deg, rgb(224, 65, 31) 0%, rgb(255,161,37) 100%);
+    margin: auto;
+    border: none;
+}
+
+/*---------------OTHERS---------------*/
+.max-width-2500 {
+    max-width: 2500px;
+}

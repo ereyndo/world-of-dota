@@ -1,3 +1,5 @@
+import '../scss/style.scss';
+
 const mainHeader = document.querySelector(".header");
 const sidenavBlock = document.querySelector(".header__sidenav");
 const sidenavBtn = document.querySelector(".header__sidenav-btn");
@@ -41,7 +43,6 @@ function closeSmallSidenav() {
 
 function goToTheSectionOfArticles() {
     const clientY = sectionOfArticles.getBoundingClientRect().top + pageYOffset - mainHeader.offsetHeight;
-    console.log(clientY);
     window.scrollTo(0, clientY);
 }
 
